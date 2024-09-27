@@ -56,7 +56,7 @@ public class AppParameters {
         }
 
         AppParameters otherAppParameters = (AppParameters) other;
-        return Objects.equals(configPath, otherAppParameters.configPath);
+        return Objects.equals(getConfigPath(), otherAppParameters.configPath);
     }
 
     @Override
