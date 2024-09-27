@@ -13,6 +13,9 @@ import org.junit.jupiter.api.io.TempDir;
 import javafx.fxml.FXML;
 import seedu.address.MainApp;
 
+/**
+ * Tests the Ui.
+ */
 public class UiPartTest {
 
     private static final String MISSING_FILE_PATH = "UiPartTest/missingFile.fxml";
@@ -84,7 +87,7 @@ public class UiPartTest {
 
     /**
      * UiPart used for testing.
-     * It should only be used with invalid FXML files or the valid file located at {@link VALID_FILE_PATH}.
+     * It should only be used with invalid FXML files or the valid file located at {@link UiPartTest#VALID_FILE_PATH}.
      */
     private static class TestUiPart<T> extends UiPart<T> {
 
