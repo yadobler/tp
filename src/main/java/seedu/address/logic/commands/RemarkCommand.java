@@ -4,6 +4,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 public class RemarkCommand extends Command {
+
+    public static final String COMMAND_WORD = "remark";
+
     /**
      * Executes the command and returns the result message.
      *
