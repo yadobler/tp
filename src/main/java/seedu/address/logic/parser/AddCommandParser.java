@@ -54,14 +54,14 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_DOB, PREFIX_GENDER,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-        DateOfBirth dob = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
-        Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Name name = Name.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Nric nric = Nric.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        DateOfBirth dob = DateOfBirth.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
+        Gender gender = Gender.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
+        Phone phone = Phone.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = Email.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Address address = Address.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Set<Tag> tagList = Tag.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Appointment> appointmentList = Collections.emptySet();
         Set<MedCon> medConList = Collections.emptySet();
         Priority priority = new Priority();
