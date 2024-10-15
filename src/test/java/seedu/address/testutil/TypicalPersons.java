@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TestValues.TAG_DESC_FRIEND;
 import static seedu.address.testutil.TestValues.VALID_ADDRESS_AMY;
 import static seedu.address.testutil.TestValues.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.TestValues.VALID_DOB_AMY;
@@ -8,12 +9,15 @@ import static seedu.address.testutil.TestValues.VALID_EMAIL_AMY;
 import static seedu.address.testutil.TestValues.VALID_EMAIL_BOB;
 import static seedu.address.testutil.TestValues.VALID_GENDER_AMY;
 import static seedu.address.testutil.TestValues.VALID_GENDER_BOB;
+import static seedu.address.testutil.TestValues.VALID_MEDCON;
 import static seedu.address.testutil.TestValues.VALID_NAME_AMY;
 import static seedu.address.testutil.TestValues.VALID_NAME_BOB;
 import static seedu.address.testutil.TestValues.VALID_NRIC_AMY;
 import static seedu.address.testutil.TestValues.VALID_NRIC_BOB;
 import static seedu.address.testutil.TestValues.VALID_PHONE_AMY;
 import static seedu.address.testutil.TestValues.VALID_PHONE_BOB;
+import static seedu.address.testutil.TestValues.VALID_PRIORITY_AMY;
+import static seedu.address.testutil.TestValues.VALID_PRIORITY_BOB;
 import static seedu.address.testutil.TestValues.VALID_TAG_FRIEND;
 import static seedu.address.testutil.TestValues.VALID_TAG_HUSBAND;
 
@@ -76,10 +80,11 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withNric(VALID_NRIC_AMY).withDateOfBirth(VALID_DOB_AMY).withGender(VALID_GENDER_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
-            .build();
+            .withPriority(VALID_PRIORITY_AMY).withMedCons(VALID_MEDCON).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withNric(VALID_NRIC_BOB).withDateOfBirth(VALID_DOB_BOB).withGender(VALID_GENDER_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withTags(VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

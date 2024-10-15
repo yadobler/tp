@@ -26,6 +26,8 @@ import static seedu.address.testutil.TestValues.PHONE_DESC_AMY;
 import static seedu.address.testutil.TestValues.PHONE_DESC_BOB;
 import static seedu.address.testutil.TestValues.PREAMBLE_NON_EMPTY;
 import static seedu.address.testutil.TestValues.PREAMBLE_WHITESPACE;
+import static seedu.address.testutil.TestValues.PRIORITY_DESC_AMY;
+import static seedu.address.testutil.TestValues.PRIORITY_DESC_BOB;
 import static seedu.address.testutil.TestValues.TAG_DESC_FRIEND;
 import static seedu.address.testutil.TestValues.TAG_DESC_HUSBAND;
 import static seedu.address.testutil.TestValues.VALID_ADDRESS_BOB;
@@ -69,12 +71,12 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                                   + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB
+                                   + TAG_DESC_FRIEND + PRIORITY_DESC_BOB, new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -82,7 +84,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB
+                        + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB + PRIORITY_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -198,9 +200,9 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withTags().withMedCons().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + NRIC_DESC_AMY + DOB_DESC_AMY + GENDER_DESC_AMY,
+                + NRIC_DESC_AMY + DOB_DESC_AMY + GENDER_DESC_AMY + PRIORITY_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEPERIOD;
 
@@ -45,6 +46,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE).append(person.getPhone().value).append(" ");
         sb.append(PREFIX_EMAIL).append(person.getEmail().value).append(" ");
         sb.append(PREFIX_ADDRESS).append(person.getAddress().value).append(" ");
+        sb.append(PREFIX_PRIORITY).append(person.getPriority()).append(" ");
         for (Tag tag : person.getTags()) {
             sb.append(PREFIX_TAG).append(tag.tagName).append(" ");
         }

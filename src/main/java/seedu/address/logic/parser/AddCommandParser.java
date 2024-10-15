@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collections;
@@ -44,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_DOB, PREFIX_GENDER,
-                        PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                        PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PRIORITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_DOB, PREFIX_GENDER,
                 PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
@@ -53,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_DOB, PREFIX_GENDER,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PRIORITY);
         Name name = Name.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Nric nric = Nric.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         DateOfBirth dob = DateOfBirth.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
@@ -64,7 +65,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = Tag.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Appointment> appointmentList = Collections.emptySet();
         Set<MedCon> medConList = Collections.emptySet();
-        Priority priority = new Priority();
+        // TODO: change Magic String "NONE" to valid enum
+        Priority priority = new Priority(argMultimap.getValue(PREFIX_PRIORITY).orElse("NONE"));
 
         logger.info("Successfully parsed all fields for AddCommand");
         Person person = new Person(name, phone, email, nric, address, dob, gender, tagList, priority, appointmentList,

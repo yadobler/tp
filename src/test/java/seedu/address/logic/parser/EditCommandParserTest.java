@@ -19,6 +19,7 @@ import static seedu.address.testutil.TestValues.VALID_ADDRESS_AMY;
 import static seedu.address.testutil.TestValues.VALID_EMAIL_AMY;
 import static seedu.address.testutil.TestValues.VALID_EMAIL_BOB;
 import static seedu.address.testutil.TestValues.VALID_NAME_AMY;
+import static seedu.address.testutil.TestValues.VALID_NRIC;
 import static seedu.address.testutil.TestValues.VALID_NRIC_AMY;
 import static seedu.address.testutil.TestValues.VALID_PHONE_AMY;
 import static seedu.address.testutil.TestValues.VALID_PHONE_BOB;
@@ -27,7 +28,6 @@ import static seedu.address.testutil.TestValues.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -45,15 +45,12 @@ import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.TestValues;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
-
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
-
-    private static final Nric nric = new Nric("T1234567A");
 
     private static final EditCommandParser parser = new EditCommandParser();
 
@@ -102,11 +99,11 @@ public class EditCommandParserTest {
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, VALID_NRIC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND
-                + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_NRIC_AMY + TAG_DESC_FRIEND + TAG_EMPTY
-                + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_NRIC_AMY + TAG_EMPTY + TAG_DESC_FRIEND
-                + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+                                   + TestValues.TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NRIC_AMY + TAG_DESC_FRIEND + TestValues.TAG_EMPTY
+                                   + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NRIC_AMY + TestValues.TAG_EMPTY + TAG_DESC_FRIEND
+                                   + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NAME_DESC + INVALID_EMAIL_DESC
@@ -206,7 +203,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_resetTags_success() {
         Nric nric = new Nric(ALICE.getNric().value);
-        String userInput = nric + TAG_EMPTY;
+        String userInput = nric + TestValues.TAG_EMPTY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(new NricMatchesPredicate(nric), descriptor);

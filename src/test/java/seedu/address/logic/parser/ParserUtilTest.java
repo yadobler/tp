@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,30 +20,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.TestValues;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
-    private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_NRIC = "S123456";
-    private static final String INVALID_GENDER = "x";
-    private static final String INVALID_DATE_OF_BIRTH_FORMAT = "2020/12/12";
-    private static final String INVALID_DATE_OF_BIRTH_VALUE = LocalDate.now().plusDays(2)
-            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-    private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
-    private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_NRIC = "T0123456A";
-    private static final String VALID_GENDER = "f";
-    private static final String VALID_DOB = "2020-11-11";
-    private static final String VALID_TAG_2 = "neighbour";
-
-    private static final String WHITESPACE = " \t\r\n";
 
     @Test
     public void parseName_null_throwsNullPointerException() {
@@ -54,19 +31,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> Name.parseName(INVALID_NAME));
+        assertThrows(ParseException.class, () -> Name.parseName(TestValues.INVALID_NAME));
     }
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
-        Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, Name.parseName(VALID_NAME));
+        Name expectedName = new Name(TestValues.VALID_NAME);
+        assertEquals(expectedName, Name.parseName(TestValues.VALID_NAME));
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
-        Name expectedName = new Name(VALID_NAME);
+        String nameWithWhitespace = TestValues.WHITESPACE + TestValues.VALID_NAME + TestValues.WHITESPACE;
+        Name expectedName = new Name(TestValues.VALID_NAME);
         assertEquals(expectedName, Name.parseName(nameWithWhitespace));
     }
 
@@ -77,19 +54,19 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> Phone.parsePhone(INVALID_PHONE));
+        assertThrows(ParseException.class, () -> Phone.parsePhone(TestValues.INVALID_PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, Phone.parsePhone(VALID_PHONE));
+        Phone expectedPhone = new Phone(TestValues.VALID_PHONE);
+        assertEquals(expectedPhone, Phone.parsePhone(TestValues.VALID_PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE);
+        String phoneWithWhitespace = TestValues.WHITESPACE + TestValues.VALID_PHONE + TestValues.WHITESPACE;
+        Phone expectedPhone = new Phone(TestValues.VALID_PHONE);
         assertEquals(expectedPhone, Phone.parsePhone(phoneWithWhitespace));
     }
 
@@ -100,19 +77,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> Address.parseAddress(INVALID_ADDRESS));
+        assertThrows(ParseException.class, () -> Address.parseAddress(TestValues.INVALID_ADDRESS));
     }
 
     @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, Address.parseAddress(VALID_ADDRESS));
+        Address expectedAddress = new Address(TestValues.VALID_ADDRESS);
+        assertEquals(expectedAddress, Address.parseAddress(TestValues.VALID_ADDRESS));
     }
 
     @Test
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
+        String addressWithWhitespace = TestValues.WHITESPACE + TestValues.VALID_ADDRESS + TestValues.WHITESPACE;
+        Address expectedAddress = new Address(TestValues.VALID_ADDRESS);
         assertEquals(expectedAddress, Address.parseAddress(addressWithWhitespace));
     }
 
@@ -123,19 +100,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseNric_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> Nric.parseNric(INVALID_NRIC));
+        assertThrows(ParseException.class, () -> Nric.parseNric(TestValues.INVALID_NRIC));
     }
 
     @Test
     public void parseNric_validValueWithoutWhitespace_returnsNric() throws Exception {
-        Nric expectedNric = new Nric(VALID_NRIC);
-        assertEquals(expectedNric, Nric.parseNric(VALID_NRIC));
+        Nric expectedNric = new Nric(TestValues.VALID_NRIC);
+        assertEquals(expectedNric, Nric.parseNric(TestValues.VALID_NRIC));
     }
 
     @Test
     public void parseNric_validValueWithWhitespace_returnsTrimmedNric() throws Exception {
-        String nricWithWhitespace = WHITESPACE + VALID_NRIC + WHITESPACE;
-        Nric expectedNric = new Nric(VALID_NRIC);
+        String nricWithWhitespace = TestValues.WHITESPACE + TestValues.VALID_NRIC + TestValues.WHITESPACE;
+        Nric expectedNric = new Nric(TestValues.VALID_NRIC);
         assertEquals(expectedNric, Nric.parseNric(nricWithWhitespace));
     }
 
@@ -146,19 +123,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseGender_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> Gender.parseGender(INVALID_GENDER));
+        assertThrows(ParseException.class, () -> Gender.parseGender(TestValues.INVALID_GENDER));
     }
 
     @Test
     public void parseGender_validValueWithoutWhitespace_returnsGender() throws Exception {
-        Gender expectedGender = new Gender(VALID_GENDER);
-        assertEquals(expectedGender, Gender.parseGender(VALID_GENDER));
+        Gender expectedGender = new Gender(TestValues.VALID_GENDER);
+        assertEquals(expectedGender, Gender.parseGender(TestValues.VALID_GENDER));
     }
 
     @Test
     public void parseGender_validValueWithWhitespace_returnsTrimmedGender() throws Exception {
-        String genderWithWhitespace = WHITESPACE + VALID_GENDER + WHITESPACE;
-        Gender expectedGender = new Gender(VALID_GENDER);
+        String genderWithWhitespace = TestValues.WHITESPACE + TestValues.VALID_GENDER + TestValues.WHITESPACE;
+        Gender expectedGender = new Gender(TestValues.VALID_GENDER);
         assertEquals(expectedGender, Gender.parseGender(genderWithWhitespace));
     }
 
@@ -169,24 +146,24 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateOfBirth_invalidFormat_throwsParseException() {
-        assertThrows(ParseException.class, () -> DateOfBirth.parseDateOfBirth(INVALID_DATE_OF_BIRTH_FORMAT));
+        assertThrows(ParseException.class, () -> DateOfBirth.parseDateOfBirth(TestValues.INVALID_DATE_OF_BIRTH_FORMAT));
     }
 
     @Test
     public void parseDateOfBirth_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> DateOfBirth.parseDateOfBirth(INVALID_DATE_OF_BIRTH_VALUE));
+        assertThrows(ParseException.class, () -> DateOfBirth.parseDateOfBirth(TestValues.INVALID_DATE_OF_BIRTH_VALUE));
     }
 
     @Test
     public void parseDateOfBirth_validValueWithoutWhitespace_returnsDateOfBirth() throws Exception {
-        DateOfBirth expectedDateOfBirth = new DateOfBirth(VALID_DOB);
-        assertEquals(expectedDateOfBirth, DateOfBirth.parseDateOfBirth(VALID_DOB));
+        DateOfBirth expectedDateOfBirth = new DateOfBirth(TestValues.VALID_DOB);
+        assertEquals(expectedDateOfBirth, DateOfBirth.parseDateOfBirth(TestValues.VALID_DOB));
     }
 
     @Test
     public void parseDateOfBirth_validValueWithWhitespace_returnsTrimmedDateOfBirth() throws Exception {
-        String dobWithWhitespace = WHITESPACE + VALID_DOB + WHITESPACE;
-        DateOfBirth expectedDateOfBirth = new DateOfBirth(VALID_DOB);
+        String dobWithWhitespace = TestValues.WHITESPACE + TestValues.VALID_DOB + TestValues.WHITESPACE;
+        DateOfBirth expectedDateOfBirth = new DateOfBirth(TestValues.VALID_DOB);
         assertEquals(expectedDateOfBirth, DateOfBirth.parseDateOfBirth(dobWithWhitespace));
     }
 
@@ -197,19 +174,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> Email.parseEmail(INVALID_EMAIL));
+        assertThrows(ParseException.class, () -> Email.parseEmail(TestValues.INVALID_EMAIL));
     }
 
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, Email.parseEmail(VALID_EMAIL));
+        Email expectedEmail = new Email(TestValues.VALID_EMAIL);
+        assertEquals(expectedEmail, Email.parseEmail(TestValues.VALID_EMAIL));
     }
 
     @Test
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
+        String emailWithWhitespace = TestValues.WHITESPACE + TestValues.VALID_EMAIL + TestValues.WHITESPACE;
+        Email expectedEmail = new Email(TestValues.VALID_EMAIL);
         assertEquals(expectedEmail, Email.parseEmail(emailWithWhitespace));
     }
 
@@ -220,19 +197,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> Tag.parseTag(INVALID_TAG));
+        assertThrows(ParseException.class, () -> Tag.parseTag(TestValues.INVALID_TAG));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, Tag.parseTag(VALID_TAG_1));
+        Tag expectedTag = new Tag(TestValues.VALID_TAG_1);
+        assertEquals(expectedTag, Tag.parseTag(TestValues.VALID_TAG_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
+        String tagWithWhitespace = TestValues.WHITESPACE + TestValues.VALID_TAG_1 + TestValues.WHITESPACE;
+        Tag expectedTag = new Tag(TestValues.VALID_TAG_1);
         assertEquals(expectedTag, Tag.parseTag(tagWithWhitespace));
     }
 
@@ -243,7 +220,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> Tag.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> Tag.parseTags(Arrays.asList(TestValues.VALID_TAG_1, TestValues.INVALID_TAG)));
     }
 
     @Test
@@ -253,8 +230,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = Tag.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> actualTagSet = Tag.parseTags(Arrays.asList(TestValues.VALID_TAG_1, TestValues.VALID_TAG_2));
+        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(TestValues.VALID_TAG_1), new Tag(
+                TestValues.VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

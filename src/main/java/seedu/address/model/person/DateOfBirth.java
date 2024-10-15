@@ -5,7 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.DateUtil.isAfterToday;
 import static seedu.address.commons.util.DateUtil.isValidDate;
 
-import seedu.address.commons.util.DateUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

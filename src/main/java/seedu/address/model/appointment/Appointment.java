@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.DateUtil;
 import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
