@@ -16,8 +16,8 @@ import seedu.address.model.person.NricMatchesPredicate;
  * As we are only doing white-box testing, our test cases do not cover path variations
  * outside of the DeleteCommand code. For example, inputs "S1234567A" and "T0111335I" take the
  * same path through the DeleteCommand, and therefore we test only one of them.
- * The path variation for those two cases occur inside the  and
- * therefore should be covered by the PersonPropertiesParserTest.
+ * The path variation for those two cases occur inside the and
+ * therefore should be covered by the respective parser tests within Nric.
  */
 public class DeleteCommandParserTest {
 
