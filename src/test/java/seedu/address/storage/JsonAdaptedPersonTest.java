@@ -309,7 +309,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidAppointments_throwsIllegalValueException() {
         List<JsonAdaptedAppointment> invalidAppointments = new ArrayList<>(TestValues.VALID_APPOINTMENTS);
-        invalidAppointments.add(new JsonAdaptedAppointment(TestValues.INVALID_APPOINTMENTS));
+        invalidAppointments.add(new JsonAdaptedAppointment(TestValues.INVALID_APPOINTMENT_NAME_SERIALISED));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(TestValues.VALID_NAME,
                                       TestValues.VALID_PHONE,
@@ -319,7 +319,8 @@ public class JsonAdaptedPersonTest {
                                       TestValues.VALID_DATE_OF_BIRTH,
                                       TestValues.VALID_GENDER,
                                       TestValues.VALID_TAGS,
-                                      TestValues.VALID_PRIORITY, invalidAppointments,
+                                      TestValues.VALID_PRIORITY,
+                                      invalidAppointments,
                                       TestValues.VALID_MEDCONS);
     }
     @Test

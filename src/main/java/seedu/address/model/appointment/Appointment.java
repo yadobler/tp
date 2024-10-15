@@ -74,7 +74,7 @@ public class Appointment implements Comparable<Appointment> {
      *
      * @throws ParseException if the given {@code appointment} is invalid.
      */
-    public static Appointment parseSerialisedAppointment(String appointment) throws ParseException {
+    public static Appointment parseAppointment(String appointment) throws ParseException {
         requireNonNull(appointment);
         String[] trimmedAppointments = appointment.trim().split(":");
         if (trimmedAppointments.length < 3) {
@@ -88,6 +88,12 @@ public class Appointment implements Comparable<Appointment> {
         if (!isValidDate(trimmedAppointments[1])) {
             throw new ParseException(MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
         }
+        try {
+            Appointment.checkIsTimePeriodValid(trimmedAppointments[2]);
+        } catch (Exception e) {
+            throw new ParseException(e.getMessage());
+        }
+
         try {
             return new Appointment(trimmedAppointments[0], trimmedAppointments[1], trimmedAppointments[2]);
         } catch (IllegalValueException e) {
@@ -106,7 +112,7 @@ public class Appointment implements Comparable<Appointment> {
 
         final Set<Appointment> appointmentSet = new HashSet<>();
         for (String appointmentName : appointments) {
-            appointmentSet.add(parseSerialisedAppointment(appointmentName));
+            appointmentSet.add(parseAppointment(appointmentName));
         }
         return appointmentSet;
     }
