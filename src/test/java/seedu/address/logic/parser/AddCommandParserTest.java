@@ -26,7 +26,6 @@ import static seedu.address.testutil.TestValues.INVALID_GENDER_DESC;
 import static seedu.address.testutil.TestValues.INVALID_NAME_DESC;
 import static seedu.address.testutil.TestValues.INVALID_NRIC_DESC;
 import static seedu.address.testutil.TestValues.INVALID_PHONE_DESC;
-import static seedu.address.testutil.TestValues.INVALID_TAG_DESC;
 import static seedu.address.testutil.TestValues.NAME_DESC_AMY;
 import static seedu.address.testutil.TestValues.NAME_DESC_BOB;
 import static seedu.address.testutil.TestValues.NRIC_DESC_AMY;
@@ -46,8 +45,6 @@ import static seedu.address.testutil.TestValues.VALID_GENDER_BOB;
 import static seedu.address.testutil.TestValues.VALID_NAME_BOB;
 import static seedu.address.testutil.TestValues.VALID_NRIC_BOB;
 import static seedu.address.testutil.TestValues.VALID_PHONE_BOB;
-import static seedu.address.testutil.TestValues.VALID_TAG_FRIEND;
-import static seedu.address.testutil.TestValues.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 

@@ -17,8 +17,6 @@ import static seedu.address.testutil.TestValues.VALID_PHONE_AMY;
 import static seedu.address.testutil.TestValues.VALID_PHONE_BOB;
 import static seedu.address.testutil.TestValues.VALID_PRIORITY_AMY;
 import static seedu.address.testutil.TestValues.VALID_PRIORITY_BOB;
-import static seedu.address.testutil.TestValues.VALID_TAG_FRIEND;
-import static seedu.address.testutil.TestValues.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
