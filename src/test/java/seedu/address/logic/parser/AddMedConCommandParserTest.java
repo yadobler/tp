@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TestValues.INVALID_MEDCON_DESC;
 import static seedu.address.testutil.TestValues.INVALID_NRIC_DESC;
 import static seedu.address.testutil.TestValues.MEDCON_DESC_AMY;
@@ -13,8 +15,6 @@ import static seedu.address.testutil.TestValues.VALID_MEDCON_AMY;
 import static seedu.address.testutil.TestValues.VALID_MEDCON_BOB;
 import static seedu.address.testutil.TestValues.VALID_NRIC_AMY;
 import static seedu.address.testutil.TestValues.VALID_NRIC_BOB;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Collections;
 import java.util.HashSet;

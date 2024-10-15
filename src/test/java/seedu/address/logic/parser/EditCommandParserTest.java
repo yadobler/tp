@@ -1,6 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TestValues.ADDRESS_DESC_AMY;
 import static seedu.address.testutil.TestValues.ADDRESS_DESC_BOB;
 import static seedu.address.testutil.TestValues.EMAIL_DESC_AMY;
@@ -19,17 +24,11 @@ import static seedu.address.testutil.TestValues.VALID_ADDRESS_AMY;
 import static seedu.address.testutil.TestValues.VALID_EMAIL_AMY;
 import static seedu.address.testutil.TestValues.VALID_EMAIL_BOB;
 import static seedu.address.testutil.TestValues.VALID_NAME_AMY;
-import static seedu.address.testutil.TestValues.VALID_NRIC;
 import static seedu.address.testutil.TestValues.VALID_NRIC_AMY;
 import static seedu.address.testutil.TestValues.VALID_PHONE_AMY;
 import static seedu.address.testutil.TestValues.VALID_PHONE_BOB;
 import static seedu.address.testutil.TestValues.VALID_TAG_FRIEND;
 import static seedu.address.testutil.TestValues.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;

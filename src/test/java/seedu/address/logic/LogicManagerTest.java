@@ -3,6 +3,7 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_PERSON_NRIC_NOT_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestValues.ADDRESS_DESC_AMY;
 import static seedu.address.testutil.TestValues.DOB_DESC_AMY;
 import static seedu.address.testutil.TestValues.EMAIL_DESC_AMY;
@@ -10,9 +11,7 @@ import static seedu.address.testutil.TestValues.GENDER_DESC_AMY;
 import static seedu.address.testutil.TestValues.NAME_DESC_AMY;
 import static seedu.address.testutil.TestValues.NRIC_DESC_AMY;
 import static seedu.address.testutil.TestValues.PHONE_DESC_AMY;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestValues.PRIORITY_DESC_AMY;
-import static seedu.address.testutil.TestValues.VALID_MEDCON;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;

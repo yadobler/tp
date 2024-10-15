@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TestValues.TAG_DESC_FRIEND;
 import static seedu.address.testutil.TestValues.VALID_ADDRESS_AMY;
 import static seedu.address.testutil.TestValues.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.TestValues.VALID_DOB_AMY;

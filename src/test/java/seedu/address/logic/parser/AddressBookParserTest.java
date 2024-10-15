@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestValues.APPOINTMENT_DESC_AMY;
 import static seedu.address.testutil.TestValues.NRIC_DESC_AMY;
 import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_DATE_AMY;
@@ -11,7 +12,6 @@ import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_NAME_AMY;
 import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_TIMEPERIOD_AMY;
 import static seedu.address.testutil.TestValues.VALID_DEL_APPT_AMY_DESC;
 import static seedu.address.testutil.TestValues.VALID_NRIC_AMY;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;

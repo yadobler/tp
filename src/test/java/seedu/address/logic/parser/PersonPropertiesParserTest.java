@@ -22,7 +22,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TestValues;
 
-public class ParserUtilTest {
+public class PersonPropertiesParserTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
@@ -146,7 +146,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateOfBirth_invalidFormat_throwsParseException() {
-        assertThrows(ParseException.class, () -> DateOfBirth.parseDateOfBirth(TestValues.INVALID_DATE_OF_BIRTH_FORMAT));
+        assertThrows(ParseException.class, () -> DateOfBirth.parseDateOfBirth(
+                TestValues.INVALID_DATE_OF_BIRTH_FORMAT));
     }
 
     @Test
@@ -220,7 +221,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> Tag.parseTags(Arrays.asList(TestValues.VALID_TAG_1, TestValues.INVALID_TAG)));
+        assertThrows(ParseException.class, () -> Tag.parseTags(Arrays.asList(TestValues.VALID_TAG_1,
+                                                                             TestValues.INVALID_TAG)));
     }
 
     @Test

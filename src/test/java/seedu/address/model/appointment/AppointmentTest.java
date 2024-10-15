@@ -1,5 +1,6 @@
 package seedu.address.model.appointment;
 
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestValues.INVALID_APPOINTMENT_DATE_FORMAT;
 import static seedu.address.testutil.TestValues.INVALID_APPOINTMENT_DATE_NONEXISTANT;
 import static seedu.address.testutil.TestValues.INVALID_APPOINTMENT_NAME;
@@ -8,7 +9,6 @@ import static seedu.address.testutil.TestValues.INVALID_APPOINTMENT_TIMEPERIOD_O
 import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_DATE_DENTAL;
 import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_NAME_DENTAL;
 import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_TIMEPERIOD_DENTAL;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
