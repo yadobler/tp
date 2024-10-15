@@ -66,8 +66,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = new HashSet<>();
         Set<Appointment> appointmentList = Collections.emptySet();
         Set<MedCon> medConList = Collections.emptySet();
-        // TODO: change Magic String "NONE" to valid enum
-        Priority priority = new Priority(argMultimap.getValue(PREFIX_PRIORITY).orElse("NONE"));
+        Priority priority = new Priority();
 
         logger.info("Successfully parsed all fields for AddCommand");
         Person person = new Person(name, phone, email, nric, address, dob, gender, tagList, priority, appointmentList,
