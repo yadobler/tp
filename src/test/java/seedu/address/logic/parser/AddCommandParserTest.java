@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TestValues.ADDRESS_DESC_AMY;
 import static seedu.address.testutil.TestValues.ADDRESS_DESC_BOB;
+import static seedu.address.testutil.TestValues.BOB;
 import static seedu.address.testutil.TestValues.DOB_DESC_AMY;
 import static seedu.address.testutil.TestValues.DOB_DESC_BOB;
 import static seedu.address.testutil.TestValues.EMAIL_DESC_AMY;
@@ -34,10 +35,6 @@ import static seedu.address.testutil.TestValues.PHONE_DESC_AMY;
 import static seedu.address.testutil.TestValues.PHONE_DESC_BOB;
 import static seedu.address.testutil.TestValues.PREAMBLE_NON_EMPTY;
 import static seedu.address.testutil.TestValues.PREAMBLE_WHITESPACE;
-import static seedu.address.testutil.TestValues.PRIORITY_DESC_AMY;
-import static seedu.address.testutil.TestValues.PRIORITY_DESC_BOB;
-import static seedu.address.testutil.TestValues.TAG_DESC_FRIEND;
-import static seedu.address.testutil.TestValues.TAG_DESC_HUSBAND;
 import static seedu.address.testutil.TestValues.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.TestValues.VALID_DOB_BOB;
 import static seedu.address.testutil.TestValues.VALID_EMAIL_BOB;
@@ -45,8 +42,6 @@ import static seedu.address.testutil.TestValues.VALID_GENDER_BOB;
 import static seedu.address.testutil.TestValues.VALID_NAME_BOB;
 import static seedu.address.testutil.TestValues.VALID_NRIC_BOB;
 import static seedu.address.testutil.TestValues.VALID_PHONE_BOB;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -67,18 +62,18 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).build();
+        Person expectedPerson = new PersonBuilder(BOB).withoutExtraProperties().build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB + PRIORITY_DESC_BOB,
+                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB,
                            new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB
-                + DOB_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
+                + DOB_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -185,15 +180,6 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().withMedCons().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + NRIC_DESC_AMY + DOB_DESC_AMY + GENDER_DESC_AMY + PRIORITY_DESC_AMY,
-                new AddCommand(expectedPerson));
-    }
-
-    @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
@@ -234,33 +220,28 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + NRIC_DESC_BOB + DOB_DESC_BOB + GENDER_DESC_BOB, Address.MESSAGE_CONSTRAINTS);
 
         // invalid nric
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_NRIC_DESC + DOB_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                Nric.MESSAGE_CONSTRAINTS);
+                + INVALID_NRIC_DESC + DOB_DESC_BOB + GENDER_DESC_BOB, Nric.MESSAGE_CONSTRAINTS);
 
         // invalid date of birth format
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + NRIC_DESC_BOB + INVALID_DOB_FORMAT_DESC + GENDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                DateOfBirth.MESSAGE_CONSTRAINTS_WRONG_FORMAT);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + NRIC_DESC_BOB
+                                   + INVALID_DOB_FORMAT_DESC + GENDER_DESC_BOB,
+                           DateOfBirth.MESSAGE_CONSTRAINTS_WRONG_FORMAT);
 
         // invalid date of birth value
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

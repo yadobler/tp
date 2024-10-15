@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TestValues.AMY;
+import static seedu.address.testutil.TestValues.BOB;
 import static seedu.address.testutil.TestValues.VALID_ADDRESS_AMY;
 import static seedu.address.testutil.TestValues.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.TestValues.VALID_DOB_AMY;
@@ -22,8 +24,6 @@ import static seedu.address.testutil.TestValues.VALID_PHONE_BOB;
 import static seedu.address.testutil.TestValues.VALID_TAG_FRIEND;
 import static seedu.address.testutil.TestValues.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 

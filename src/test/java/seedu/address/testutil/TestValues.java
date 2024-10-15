@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEPERIOD;
-import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.time.LocalDate;
@@ -20,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAdaptedAppointment;
 import seedu.address.storage.JsonAdaptedMedCon;
 import seedu.address.storage.JsonAdaptedTag;
@@ -29,12 +29,6 @@ import seedu.address.storage.JsonAdaptedTag;
  */
 public class TestValues {
 
-    public static final List<JsonAdaptedAppointment> VALID_APPOINTMENTS =
-            BENSON.getAppointments().stream().map(JsonAdaptedAppointment::new).collect(Collectors.toList());
-    public static final List<JsonAdaptedMedCon> VALID_MEDCONS =
-            AMY.getMedCons().stream().map(JsonAdaptedMedCon::new).collect(Collectors.toList());
-    public static final List<JsonAdaptedTag> VALID_TAGS =
-            BENSON.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
     public static final String VALID_ADDRESS = "123 Main Street #0505";
     public static final String VALID_DATE_OF_BIRTH = BENSON.getDateOfBirth().toString();
     public static final String VALID_DOB = "2020-11-11";
@@ -92,6 +86,12 @@ public class TestValues {
     public static final String VALID_APPOINTMENT_AMY_SERIALISED = VALID_APPOINTMENT_NAME_AMY + ":"
                                                                   + VALID_APPOINTMENT_DATE_AMY + ":"
                                                                   + VALID_APPOINTMENT_TIMEPERIOD_AMY;
+    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                                                        .withNric(VALID_NRIC_AMY).withDateOfBirth(VALID_DOB_AMY)
+                                                        .withGender(VALID_GENDER_AMY).withEmail(VALID_EMAIL_AMY)
+                                                        .withAddress(VALID_ADDRESS_AMY)
+                                                        .withPriority(VALID_PRIORITY_AMY)
+                                                        .withMedCons(VALID_MEDCON).build();
 
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String DOB_DESC_AMY = " " + PREFIX_DOB + VALID_DOB_AMY;
@@ -123,6 +123,11 @@ public class TestValues {
     public static final String VALID_APPOINTMENT_BOB_SERIALISED = VALID_APPOINTMENT_NAME_BOB + ":"
                                                                   + VALID_APPOINTMENT_DATE_BOB + ":"
                                                                   + VALID_APPOINTMENT_TIMEPERIOD_BOB;
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                                                        .withNric(VALID_NRIC_BOB).withDateOfBirth(VALID_DOB_BOB)
+                                                        .withGender(VALID_GENDER_BOB).withEmail(VALID_EMAIL_BOB)
+                                                        .withAddress(VALID_ADDRESS_BOB)
+                                                        .withPriority(VALID_PRIORITY_BOB).build();
 
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String DOB_DESC_BOB = " " + PREFIX_DOB + VALID_DOB_BOB;
@@ -138,6 +143,13 @@ public class TestValues {
                                                       + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
     public static final String VALID_DEL_APPT_BOB_DESC = " " + PREFIX_DATE + VALID_APPOINTMENT_DATE_BOB + " "
                                                          + PREFIX_TIMEPERIOD + VALID_APPOINTMENT_TIMEPERIOD_BOB;
+
+    public static final List<JsonAdaptedAppointment> VALID_APPOINTMENTS =
+            BENSON.getAppointments().stream().map(JsonAdaptedAppointment::new).collect(Collectors.toList());
+    public static final List<JsonAdaptedMedCon> VALID_MEDCONS =
+            AMY.getMedCons().stream().map(JsonAdaptedMedCon::new).collect(Collectors.toList());
+    public static final List<JsonAdaptedTag> VALID_TAGS =
+            BENSON.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
 
     // empty string not allowed for addresses
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS;
@@ -222,4 +234,5 @@ public class TestValues {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String TAG_EMPTY = " " + PREFIX_TAG;
     public static final String WHITESPACE = " \t\r\n";
+
 }

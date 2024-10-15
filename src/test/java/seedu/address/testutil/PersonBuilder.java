@@ -78,6 +78,16 @@ public class PersonBuilder {
     }
 
     /**
+     * Resets the parameters of properties that cannot be added to {@code Person}.
+     */
+    public PersonBuilder withoutExtraProperties() {
+        this.medCons = new HashSet<>();
+        this.priority = new Priority("NONE");
+        this.appointments = new HashSet<>();
+        return this;
+    }
+
+    /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public PersonBuilder withName(String name) {
