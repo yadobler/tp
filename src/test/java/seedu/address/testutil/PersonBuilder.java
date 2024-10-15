@@ -82,7 +82,7 @@ public class PersonBuilder {
      */
     public PersonBuilder withoutExtraProperties() {
         this.medCons = new HashSet<>();
-        this.priority = new Priority("NONE");
+        this.priority = new Priority();
         this.appointments = new HashSet<>();
         return this;
     }
