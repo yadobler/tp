@@ -46,15 +46,6 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE).append(person.getPhone().value).append(" ");
         sb.append(PREFIX_EMAIL).append(person.getEmail().value).append(" ");
         sb.append(PREFIX_ADDRESS).append(person.getAddress().value).append(" ");
-        sb.append(PREFIX_PRIORITY).append(person.getPriority()).append(" ");
-        for (Tag tag : person.getTags()) {
-            sb.append(PREFIX_TAG).append(tag.tagName).append(" ");
-        }
-        for (Appointment s : person.getAppointments()) {
-            sb.append(PREFIX_TAG).append(s.getAppointmentName()).append(" ")
-              .append(PREFIX_DATE).append(s.getAppointmentDate()).append(" ")
-              .append(PREFIX_TIMEPERIOD).append(s.getAppointmentTimePeriod()).append(" ");
-        }
         return sb.toString();
     }
 
