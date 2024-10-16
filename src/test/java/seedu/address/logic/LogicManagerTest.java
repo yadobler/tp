@@ -12,7 +12,6 @@ import static seedu.address.testutil.TestValues.GENDER_DESC_AMY;
 import static seedu.address.testutil.TestValues.NAME_DESC_AMY;
 import static seedu.address.testutil.TestValues.NRIC_DESC_AMY;
 import static seedu.address.testutil.TestValues.PHONE_DESC_AMY;
-import static seedu.address.testutil.TestValues.PRIORITY_DESC_AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;

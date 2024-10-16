@@ -7,7 +7,6 @@ import static seedu.address.testutil.TestValues.VALID_GENDER_AMY;
 import static seedu.address.testutil.TestValues.VALID_NAME_AMY;
 import static seedu.address.testutil.TestValues.VALID_NRIC_AMY;
 import static seedu.address.testutil.TestValues.VALID_PHONE_AMY;
-import static seedu.address.testutil.TestValues.VALID_PRIORITY_AMY;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -55,7 +54,7 @@ public class PersonBuilder {
         email = new Email(VALID_EMAIL_AMY);
         address = new Address(VALID_ADDRESS_AMY);
         tags = new HashSet<>();
-        priority = new Priority(VALID_PRIORITY_AMY);
+        priority = new Priority();
         appointments = new HashSet<>();
         medCons = new HashSet<>();
     }
