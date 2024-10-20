@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TestValues.ALICE;
 import static seedu.address.testutil.TestValues.AMY;
 import static seedu.address.testutil.TestValues.BOB;
 import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_DATE_AMY;
 import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_TIMEPERIOD_AMY;
 import static seedu.address.testutil.TestValues.VALID_NRIC_AMY;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.function.Supplier;

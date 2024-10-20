@@ -8,19 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.MedCon;
+import seedu.address.testutil.TestValues;
 
 public class JsonAdaptedMedConTest {
 
-    private static final String VALID_MEDCON = "Diabetes";
-    private static final String INVALID_MEDCON_EMPTY = "";
-    private static final String INVALID_MEDCON_TOO_LONG =
-            "ThisMedicalConditionNameIsWayTooLongAndExceedsThirtyCharacters";
-    private static final String INVALID_MEDCON_SPECIAL_CHARS = "@Diabetes";
-
     @Test
     public void toModelType_validMedCon_returnsMedCon() throws Exception {
-        JsonAdaptedMedCon jsonAdaptedMedCon = new JsonAdaptedMedCon(VALID_MEDCON);
-        MedCon expectedMedCon = new MedCon(VALID_MEDCON);
+        JsonAdaptedMedCon jsonAdaptedMedCon = new JsonAdaptedMedCon(TestValues.VALID_MEDCON);
+        MedCon expectedMedCon = new MedCon(TestValues.VALID_MEDCON);
         assertEquals(expectedMedCon, jsonAdaptedMedCon.toModelType());
     }
 
@@ -45,21 +40,21 @@ public class JsonAdaptedMedConTest {
 
     @Test
     public void toModelType_invalidMedConTooLong_throwsIllegalValueException() {
-        JsonAdaptedMedCon jsonAdaptedMedCon = new JsonAdaptedMedCon(INVALID_MEDCON_TOO_LONG);
+        JsonAdaptedMedCon jsonAdaptedMedCon = new JsonAdaptedMedCon(TestValues.INVALID_MEDCON_TOO_LONG);
         assertThrows(IllegalValueException.class, "MedCon: " + MESSAGE_CONSTRAINTS_LENGTH, ()
                 -> jsonAdaptedMedCon.toModelType());
     }
 
     @Test
     public void constructor_medConObject_createsValidJsonAdaptedMedCon() {
-        MedCon medCon = new MedCon(VALID_MEDCON);
+        MedCon medCon = new MedCon(TestValues.VALID_MEDCON);
         JsonAdaptedMedCon jsonAdaptedMedCon = new JsonAdaptedMedCon(medCon);
-        assertEquals(VALID_MEDCON, jsonAdaptedMedCon.getmedConName());
+        assertEquals(TestValues.VALID_MEDCON, jsonAdaptedMedCon.getmedConName());
     }
 
     @Test
     public void getmedConName_validMedCon_returnsCorrectValue() {
-        JsonAdaptedMedCon jsonAdaptedMedCon = new JsonAdaptedMedCon(VALID_MEDCON);
-        assertEquals(VALID_MEDCON, jsonAdaptedMedCon.getmedConName());
+        JsonAdaptedMedCon jsonAdaptedMedCon = new JsonAdaptedMedCon(TestValues.VALID_MEDCON);
+        assertEquals(TestValues.VALID_MEDCON, jsonAdaptedMedCon.getmedConName());
     }
 }

@@ -4,7 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TestValues.ALICE;
 
 import java.util.HashSet;
 import java.util.Set;

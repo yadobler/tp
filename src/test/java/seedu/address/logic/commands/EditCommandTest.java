@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TestValues.ALICE;
 import static seedu.address.testutil.TestValues.AMY;
 import static seedu.address.testutil.TestValues.BOB;
+import static seedu.address.testutil.TestValues.DANIEL;
 import static seedu.address.testutil.TestValues.VALID_ADDRESS_AMY;
 import static seedu.address.testutil.TestValues.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.TestValues.VALID_DOB_AMY;
@@ -21,10 +23,6 @@ import static seedu.address.testutil.TestValues.VALID_NRIC_AMY;
 import static seedu.address.testutil.TestValues.VALID_NRIC_BOB;
 import static seedu.address.testutil.TestValues.VALID_PHONE_AMY;
 import static seedu.address.testutil.TestValues.VALID_PHONE_BOB;
-import static seedu.address.testutil.TestValues.VALID_TAG_FRIEND;
-import static seedu.address.testutil.TestValues.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Disabled;
@@ -57,7 +55,6 @@ public class EditCommandTest {
                                              .withPhone(VALID_PHONE_AMY)
                                              .withEmail(VALID_EMAIL_AMY)
                                              .withAddress(VALID_ADDRESS_AMY)
-                                             .withTags(VALID_TAG_FRIEND)
                                              .build();
 
     public static final EditPersonDescriptor DESC_BOB =
@@ -65,7 +62,7 @@ public class EditCommandTest {
                                              .withDateOfBirth(VALID_DOB_BOB).withGender(VALID_GENDER_BOB)
                                              .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                                              .withAddress(VALID_ADDRESS_BOB)
-                                             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                                             .build();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 

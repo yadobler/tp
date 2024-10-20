@@ -9,7 +9,7 @@ import seedu.address.model.allergy.Allergy;
 /**
  * Jackson-friendly version of {@link Allergy}.
  */
-class JsonAdaptedAllergy {
+public class JsonAdaptedAllergy {
 
     private final String allergyName;
 

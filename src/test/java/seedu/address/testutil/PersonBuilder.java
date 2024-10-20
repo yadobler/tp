@@ -22,15 +22,6 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_NRIC = "T0224567A";
-    public static final String DEFAULT_DOB = "2000-01-01";
-    public static final String DEFAULT_GENDER = "F";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_PRIORITY = "NONE";
-
     private Name name;
     private Nric nric;
     private DateOfBirth dob;
@@ -47,15 +38,15 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
-        name = new Name(DEFAULT_NAME);
-        nric = new Nric(DEFAULT_NRIC);
-        dob = new DateOfBirth(DEFAULT_DOB);
-        gender = new Gender(DEFAULT_GENDER);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        name = new Name(TestValues.VALID_NAME_AMY);
+        nric = new Nric(TestValues.VALID_NRIC_AMY);
+        dob = new DateOfBirth(TestValues.VALID_DOB_AMY);
+        gender = new Gender(TestValues.VALID_GENDER_AMY);
+        phone = new Phone(TestValues.VALID_PHONE_AMY);
+        email = new Email(TestValues.VALID_EMAIL_AMY);
+        address = new Address(TestValues.VALID_ADDRESS_AMY);
         tags = new HashSet<>();
-        priority = new Priority(DEFAULT_PRIORITY);
+        priority = new Priority(TestValues.VALID_PRIORITY_AMY);
         appointments = new HashSet<>();
         medCons = new HashSet<>();
     }
@@ -75,6 +66,16 @@ public class PersonBuilder {
         priority = personToCopy.getPriority();
         appointments = new HashSet<>(personToCopy.getAppointments());
         medCons = new HashSet<>(personToCopy.getMedCons());
+    }
+
+    /**
+     * Resets the parameters of properties that cannot be added to {@code Person}.
+     */
+    public PersonBuilder withoutExtraProperties() {
+        this.medCons = new HashSet<>();
+        this.priority = new Priority();
+        this.appointments = new HashSet<>();
+        return this;
     }
 
     /**
