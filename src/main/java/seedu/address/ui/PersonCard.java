@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.address.model.person.Person;
 
 /**
@@ -68,9 +69,21 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        Text priorityText = new Text("Priority: ");
+        priorityText.getStyleClass().add("label-text");
+        priority.getChildren().add(priorityText);
         applyPriorityBackground(priority, person.getPriority().priority);
+        Text medConsText = new Text("Medical Conditions:");
+        medConsText.getStyleClass().add("label-text");
+        medCons.getChildren().add(medConsText);
         addLabelsToFlowPane(person.getMedCons(), medCons);
-        addLabelsToFlowPane(person.getTags(), tags);
+        Text allergyText = new Text("Allergies:");
+        allergyText.getStyleClass().add("label-text");
+        tags.getChildren().add(allergyText);
+        addLabelsToFlowPane(person.getAllergies(), tags);
+        Text appointmentText = new Text("Appointments:");
+        appointmentText.getStyleClass().add("label-text");
+        appointments.getChildren().add(appointmentText);
         addLabelsToFlowPane(person.getAppointments(), appointments);
     }
 
@@ -85,6 +98,7 @@ public class PersonCard extends UiPart<Region> {
         // Set up the label for priority
         Label priorityLabel = new Label(person.getPriority().priority);
         priorityLabel.getStyleClass().add("priority-label");
+
         // Remove any existing priority styles
         priority.getStyleClass().removeAll("priority-high-bg", "priority-medium-bg",
                 "priority-low-bg", "priority-none-bg");
@@ -108,6 +122,7 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // Add the label to the FlowPane
+        priorityLabel.setStyle("-fx-text-fill: black;");
         priority.getChildren().add(priorityLabel);
 
     }

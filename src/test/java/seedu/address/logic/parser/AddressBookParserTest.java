@@ -4,16 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIMEPERIOD_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEL_APPT_AMY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TestValues.APPOINTMENT_DESC_AMY;
-import static seedu.address.testutil.TestValues.NRIC_DESC_AMY;
-import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_DATE_AMY;
-import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_NAME_AMY;
-import static seedu.address.testutil.TestValues.VALID_APPOINTMENT_TIMEPERIOD_AMY;
-import static seedu.address.testutil.TestValues.VALID_DEL_APPT_AMY_DESC;
-import static seedu.address.testutil.TestValues.VALID_NRIC_AMY;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -36,13 +35,13 @@ import seedu.address.logic.commands.FindMedConCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.AppointmentExistsPredicate;
 import seedu.address.model.person.MedConContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -55,7 +54,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().withoutExtraProperties().build();
+        Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
@@ -84,13 +83,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addAllergy() throws Exception {
-        Person person = new PersonBuilder().withNric(VALID_NRIC_AMY).build();
-        AddAllergyCommand command = (AddAllergyCommand) parser.parseCommand(
-                AddAllergyCommand.COMMAND_WORD + " " + PREFIX_NRIC + NRIC_DESC_AMY
-                        + " " + PREFIX_TAG + "Insulin");
-        Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag("Insulin"));
-        assertEquals(new AddAllergyCommand(new Nric(VALID_NRIC_AMY), tags), command);
+        String commandInput = AddAllergyCommand.COMMAND_WORD + " " + NRIC_DESC_AMY
+                + " " + PREFIX_ALLERGY + "Insulin";
+        AddAllergyCommand command = (AddAllergyCommand) parser.parseCommand(commandInput);
+        Set<Allergy> allergies = new HashSet<Allergy>();
+        allergies.add(new Allergy("Insulin"));
+        assertEquals(new AddAllergyCommand(new Nric(VALID_NRIC_AMY), allergies), command);
     }
 
     @Test

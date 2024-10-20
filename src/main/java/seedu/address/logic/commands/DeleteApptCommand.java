@@ -16,6 +16,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AppointmentExistsPredicate;
@@ -29,7 +30,6 @@ import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.tag.Tag;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -50,7 +50,7 @@ public class DeleteApptCommand extends Command {
             + PREFIX_DATE + "2024-10-24 "
             + PREFIX_TIMEPERIOD + "1235-1400";
 
-    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS_2S = "Deleted Appointment %s for Patient %s";
+    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS_2S = "Deleted Appointment \"%s\" for Patient %s";
     public static final String MESSAGE_PERSON_APPT_NOT_FOUND = "There is no appointment with the given date and time "
                                                                + "period for this person!";
     private static final Logger logger = LogsCenter.getLogger(DeleteApptCommand.class);
@@ -86,8 +86,8 @@ public class DeleteApptCommand extends Command {
                     + "appointment: " + targetAppt);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS_2S,
-                                               personToEdit.getNric().value,
-                                               apptToDelete));
+                                               apptToDelete,
+                                               personToEdit.getNric().value));
     }
 
     private Person createEditedPerson(Person personToEdit, Appointment apptToDelete) {
@@ -99,7 +99,7 @@ public class DeleteApptCommand extends Command {
         Gender updatedGender = personToEdit.getGender();
         Nric updatedNric = personToEdit.getNric();
         Priority updatedPriority = personToEdit.getPriority();
-        Set<Tag> updatedTags = personToEdit.getTags();
+        Set<Allergy> updatedAllergies = personToEdit.getAllergies();
         Set<MedCon> updatedMedCons = personToEdit.getMedCons();
 
 
@@ -110,7 +110,7 @@ public class DeleteApptCommand extends Command {
         Set<Appointment> newAppointments = new HashSet<>(newAppointmentsMutable);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                          updatedGender, updatedTags, updatedPriority, newAppointments, updatedMedCons);
+                          updatedGender, updatedAllergies, updatedPriority, newAppointments, updatedMedCons);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.person.Nric.parseNric;
@@ -13,8 +14,8 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddAllergyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Nric;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddAllergyCommand object
@@ -29,22 +30,25 @@ public class AddAllergyCommandParser implements Parser<AddAllergyCommand> {
      */
     public AddAllergyCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_ALLERGY);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_TAG)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_ALLERGY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAllergyCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC);
+
         try {
-            Nric nric = parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-            Set<Tag> allergies = parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+            Set<Allergy> allergies = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));
 
             logger.info("Successfully parsed nric for AddAllergyCommand: " + nric);
-            logger.info("Successfully parsed tags for AddAllergyCommand: " + allergies);
+            logger.info("Successfully parsed allergies for AddAllergyCommand: " + allergies);
 
             return new AddAllergyCommand(nric, allergies);
         } catch (ParseException pe) {
-            logger.warning("Unable to parse the NRIC or tags for FindNricCommand: " + args);
+            logger.warning("Unable to parse the nric or allergies for FindNricCommand: " + args);
             throw new ParseException(
                     String.format(AddAllergyCommand.MESSAGE_CONSTRAINT, AddAllergyCommand.MESSAGE_USAGE), pe);
         }
@@ -57,5 +61,4 @@ public class AddAllergyCommandParser implements Parser<AddAllergyCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }

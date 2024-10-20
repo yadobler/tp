@@ -1,34 +1,35 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_MILK;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_SOYBEANS;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ALLERGY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_MILK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_SOYBEANS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TestValues.ADDRESS_DESC_AMY;
-import static seedu.address.testutil.TestValues.ADDRESS_DESC_BOB;
-import static seedu.address.testutil.TestValues.EMAIL_DESC_AMY;
-import static seedu.address.testutil.TestValues.EMAIL_DESC_BOB;
-import static seedu.address.testutil.TestValues.INVALID_ADDRESS_DESC;
-import static seedu.address.testutil.TestValues.INVALID_EMAIL_DESC;
-import static seedu.address.testutil.TestValues.INVALID_NAME_DESC;
-import static seedu.address.testutil.TestValues.INVALID_PHONE_DESC;
-import static seedu.address.testutil.TestValues.INVALID_TAG_DESC;
-import static seedu.address.testutil.TestValues.NAME_DESC_AMY;
-import static seedu.address.testutil.TestValues.PHONE_DESC_AMY;
-import static seedu.address.testutil.TestValues.PHONE_DESC_BOB;
-import static seedu.address.testutil.TestValues.TAG_DESC_FRIEND;
-import static seedu.address.testutil.TestValues.TAG_DESC_HUSBAND;
-import static seedu.address.testutil.TestValues.VALID_ADDRESS_AMY;
-import static seedu.address.testutil.TestValues.VALID_EMAIL_AMY;
-import static seedu.address.testutil.TestValues.VALID_EMAIL_BOB;
-import static seedu.address.testutil.TestValues.VALID_NAME_AMY;
-import static seedu.address.testutil.TestValues.VALID_NRIC_AMY;
-import static seedu.address.testutil.TestValues.VALID_PHONE_AMY;
-import static seedu.address.testutil.TestValues.VALID_PHONE_BOB;
-import static seedu.address.testutil.TestValues.VALID_TAG_FRIEND;
-import static seedu.address.testutil.TestValues.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
@@ -36,20 +37,23 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.TestValues;
 
 public class EditCommandParserTest {
 
+    private static final String ALLERGY_EMPTY = " " + PREFIX_ALLERGY;
+
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+
+    private static final Nric nric = new Nric("T1234567A");
 
     private static final EditCommandParser parser = new EditCommandParser();
 
@@ -89,20 +93,20 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS);
         // invalid address
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
-        // invalid tag
-        assertParseFailure(parser, VALID_NRIC_AMY + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
+        // invalid allergy
+        assertParseFailure(parser, VALID_NRIC_AMY + INVALID_ALLERGY_DESC, Allergy.MESSAGE_CONSTRAINTS);
         // invalid phone followed by valid email
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_PHONE_DESC
                 + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, VALID_NRIC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND
-                                   + TestValues.TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_NRIC_AMY + TAG_DESC_FRIEND + TestValues.TAG_EMPTY
-                                   + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_NRIC_AMY + TestValues.TAG_EMPTY + TAG_DESC_FRIEND
-                                   + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        // while parsing {@code PREFIX_ALLERGY} alone will reset the tags of the {@code Person} being edited,
+        // parsing it together with a valid allergy results in error
+        assertParseFailure(parser, VALID_NRIC_AMY + ALLERGY_DESC_MILK + ALLERGY_DESC_SOYBEANS
+                + ALLERGY_EMPTY, Allergy.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NRIC_AMY + ALLERGY_DESC_MILK + ALLERGY_EMPTY
+                + ALLERGY_DESC_SOYBEANS, Allergy.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NRIC_AMY + ALLERGY_EMPTY + ALLERGY_DESC_MILK
+                + ALLERGY_DESC_SOYBEANS, Allergy.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NAME_DESC + INVALID_EMAIL_DESC
@@ -111,12 +115,12 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = VALID_NRIC_AMY + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        String userInput = VALID_NRIC_AMY + PHONE_DESC_BOB + ALLERGY_DESC_SOYBEANS
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + ALLERGY_DESC_MILK;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_ALLERGY_SOYBEANS, VALID_ALLERGY_MILK).build();
         EditCommand expectedCommand = new EditCommand(new NricMatchesPredicate(new Nric(VALID_NRIC_AMY)), descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -161,8 +165,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = nric + TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        userInput = nric + ALLERGY_DESC_MILK;
+        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_ALLERGY_MILK).build();
         expectedCommand = new EditCommand(new NricMatchesPredicate(nric), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -185,8 +189,8 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = nric + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+                + ALLERGY_DESC_MILK + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + ALLERGY_DESC_MILK
+                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + ALLERGY_DESC_SOYBEANS;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
@@ -202,7 +206,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_resetTags_success() {
         Nric nric = new Nric(ALICE.getNric().value);
-        String userInput = nric + TestValues.TAG_EMPTY;
+        String userInput = nric + ALLERGY_EMPTY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(new NricMatchesPredicate(nric), descriptor);

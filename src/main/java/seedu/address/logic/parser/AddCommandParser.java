@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
@@ -30,7 +31,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -45,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_DOB, PREFIX_GENDER,
-                        PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                        PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_DOB, PREFIX_GENDER,
                 PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
@@ -55,21 +55,21 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_DOB, PREFIX_GENDER,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-        Name name = Name.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Nric nric = Nric.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-        DateOfBirth dob = DateOfBirth.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
-        Gender gender = Gender.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-        Phone phone = Phone.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = Email.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = Address.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = new HashSet<>();
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        DateOfBirth dob = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
+        Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Set<Allergy> allergyList = new HashSet<>();
         Set<Appointment> appointmentList = Collections.emptySet();
         Set<MedCon> medConList = Collections.emptySet();
         Priority priority = new Priority();
 
         logger.info("Successfully parsed all fields for AddCommand");
-        Person person = new Person(name, phone, email, nric, address, dob, gender, tagList, priority, appointmentList,
-                medConList);
+        Person person = new Person(name, phone, email, nric, address, dob, gender, allergyList,
+                priority, appointmentList, medConList);
         logger.info("Successfully created new Person object");
 
         return new AddCommand(person);
